@@ -1,0 +1,65 @@
+/* Reuse same design as login for consistency */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f5f6fa;
+}
+
+.signup-form {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1e1e2f;
+}
+
+.signup-form label {
+  margin-top: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+.signup-form input {
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+.signup-form input:focus {
+  border-color: #007bff;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+  margin: 4px 0;
+}
+
+.btn-submit {
+  margin-top: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #28a745;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: #218838;
+}
