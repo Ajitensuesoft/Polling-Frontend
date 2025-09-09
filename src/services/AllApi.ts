@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const API = axios.create({
     // baseURL: 'http://localhost:5000/app/v1',
     baseURL: import.meta.env.VITE_API_URL,
-    // withCredentials: true,
+    withCredentials: true,
 })
 
 API.interceptors.request.use((config) => {
