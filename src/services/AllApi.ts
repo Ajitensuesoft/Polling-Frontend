@@ -5,10 +5,17 @@ import { toast } from "react-toastify";
 const API = axios.create({
     // baseURL: 'http://localhost:5000/app/v1',
     baseURL: import.meta.env.VITE_API_URL,
-    withCredentials: true,
+    // withCredentials: true,
 })
 
-
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  console.log("token",token);
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 export const signupApi = async (data: any) => {
     console.log("data of signup", data);
@@ -59,9 +66,9 @@ export const logoutApi = async () => {
 
 
 export const PollCreateApi = async (data: any) => {
-
+            // let token= localStorage.getItem("token");
     try {
-        const res = await API.post("/pollCreate", data);
+        const res = await API.post(`/pollCreate`, data);
         console.log("poll create value", res);
         return res.data.data as { Poll: IPoll };
     } catch (err: any) {
@@ -103,8 +110,10 @@ export const SinglePollApi = async (id: string) => {
 
 
 export const PollVoteApi = async (data: any) => {
+    let token= localStorage.getItem("token");
+    console.log("token",token);
     try {
-        const res = await API.post("/votePoll", data);
+        const res = await API.post(`/votePoll`, data);
         console.log("poll vote value", res);
         return res.data.data;
     } catch (err: any) {

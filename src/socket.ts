@@ -1,5 +1,21 @@
 
+// import  io  from "socket.io-client";
+
+// const socket = io("https://polling-frontend-pi.vercel.app"); 
+// export default socket;
+
+
 import  io  from "socket.io-client";
 
-const socket = io("http://localhost:5000"); 
+// const socket = io("https://polling-backend-ivcq.onrender.com", {
+//     withCredentials: true, // only if you use cookies for auth
+// });
+
+
+
+
+const socket = io("https://polling-backend-ivcq.onrender.com", {
+    withCredentials: true,
+} as SocketIOClient.ConnectOpts);
+
 export default socket;
