@@ -1,0 +1,83 @@
+.poll-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 400px;
+  margin: 20px auto;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.poll-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.poll-form .form-group {
+  margin-bottom: 15px;
+}
+
+.poll-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.poll-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.option-row input {
+  flex: 1;
+}
+
+.remove-btn {
+  margin-left: 5px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-btn {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-btn {
+  background: green;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: gray;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
