@@ -10,8 +10,8 @@ export const Routesi:React.FC = () => {
     <div>
 <Navabr/>
 <Routes>
-  <Route path="/"  element={<Home/>}/>
    <Route path="/login"  element={<Logini/>}/>
+  <Route path="/"  element={<Home/>}/>
     <Route path="/signup"  element={<Signupi/>}/>
      <Route path="/profile"  element={<Profile/>}/>
 </Routes>

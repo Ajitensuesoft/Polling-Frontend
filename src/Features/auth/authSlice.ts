@@ -80,6 +80,8 @@ export const Logout = createAsyncThunk(
     try {
       let res=await logoutApi();
       console.log("res of logout",res)
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
       return res;
     } catch (error: any) {
       return rejectWithValue(error.message || "Logout failed");
@@ -95,7 +97,7 @@ const slice=createSlice({
     name:"auth",
     initialState,
     reducers:{
-
+       
     },
 
     extraReducers(builder){
@@ -122,9 +124,10 @@ const slice=createSlice({
         .addCase(Login.rejected, (s, action) => { s.isLoading = false; s.error = action.payload as string || null; })
 
         .addCase(Logout.pending,(s)=>{s.isLoading=true,s.error=null})
-         .addCase(Logout.fulfilled,(s)=>{s.isLoading=false,s.isAuth=false,s.token=null,s.user=null,localStorage.removeItem("token");
+         .addCase(Logout.fulfilled,(s)=>{s.isLoading=false;s.isAuth=false;s.token=null;s.user=null;localStorage.removeItem("token");
 localStorage.removeItem("userId");
 localStorage.removeItem("user");
+
 })
           .addCase(Logout.rejected, (s, action) => { s.isLoading = false; s.error = action.payload as string || null; })
     }
