@@ -13,8 +13,7 @@ const navigate=useNavigate();
 
   const logoutfunction=()=>{
     dispatch(Logout())
-    dispatch(AllPolls());
-      navigate("/login");
+    
   }
 
   useEffect(() => {
