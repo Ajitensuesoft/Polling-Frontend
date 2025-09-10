@@ -5,6 +5,7 @@ import { Logini } from '../pages/Login'
 import { Signupi } from '../pages/Signup'
 import { Profile } from '../pages/Profile'
 import { Navabr } from './Navabr'
+import Comments from '../pages/Comments'
 export const Routesi:React.FC = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ export const Routesi:React.FC = () => {
   <Route path="/"  element={<Home/>}/>
     <Route path="/signup"  element={<Signupi/>}/>
      <Route path="/profile"  element={<Profile/>}/>
+     <Route path="/comments/:id"  element={<Comments/>}/>
 </Routes>
     </div>
   )

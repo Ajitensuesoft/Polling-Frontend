@@ -1,5 +1,5 @@
 import {createSlice,createAsyncThunk}from "@reduxjs/toolkit";
-import { PollCreateApi, AllPollsApi,SinglePollApi,PollVoteApi } from "../../services/AllApi";
+import { PollCreateApi, AllPollsApi,SinglePollApi,PollVoteApi,SinglePollCommentAPI } from "../../services/AllApi";
 import type { RootState } from "../../app/store";
 import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -17,6 +17,8 @@ export interface IPoll{
     Option:IOption[];
     createdBy:string
     userId:string;
+    ExpiredAt:Date;
+    status?:string;
 }
 
 
@@ -36,7 +38,7 @@ const initialState:PollState={
 
 export const PollCreate=createAsyncThunk(
     "Auth/CreatePoll",
-    async(payload:{Question:string,Option:{ value: string }[],createdBy:string},{rejectWithValue})=>{
+    async(payload:{Question:string,Option:{ value: string }[],createdBy:string,ExpiredAt:Date},{rejectWithValue})=>{
         try{
             const res=await PollCreateApi(payload);
             console.log("PollCreate res",res);
@@ -82,6 +84,23 @@ export const PollVote=createAsyncThunk(
         try{
             const res=await PollVoteApi(payload);
             console.log("PollVote res",res);
+            return res;
+        }
+        catch(err:any){
+            console.log("err",err);
+            toast.error(err.response.data.message);
+            return rejectWithValue( err)
+        }
+    }
+)
+
+
+export const SinglePollComment=createAsyncThunk(
+    "Auth/SinglePollComment",
+    async(id:string,{rejectWithValue})=>{
+        try{
+ const res=await SinglePollCommentAPI(id);
+            console.log("SinglePoll res",res);
             return res;
         }
         catch(err:any){
@@ -139,6 +158,22 @@ const PollSlice=createSlice({
             state.error=action.payload as string;
         })
         
+
+        .addCase(PollVote.pending,(state)=>{
+            state.isLoading=true;
+            state.error=null;
+        })
+        
+        .addCase(PollVote.fulfilled, (state, action) => {
+            state.isLoading = false;
+            console.log("action.payloadof singlecomment",action.payload);
+            state.Poll = Array.isArray(action.payload) ? action.payload : [];
+
+        })
+        .addCase(PollVote.rejected,(state,action)=>{
+            state.isLoading=false;
+            state.error=action.payload as string;
+        })
 
         
     }

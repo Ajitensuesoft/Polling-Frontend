@@ -158,6 +158,8 @@ import React, { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hook";
 import { selectAuthUser } from "../Features/auth/authSlice";
 import CPollPage from "./CPollPage";
+import moment from "moment";
+// import socket from "../socket";
 import {
   selectCreatePoll,
   SinglePoll,
@@ -172,11 +174,23 @@ export const Profile: React.FC = () => {
   const user = useAppSelector(selectAuthUser);
   const id = user?.id ?? "";
   const pollData = useAppSelector(selectCreatePoll);
+  console.log("pollData",pollData);
   const [hoveredOptId, setHoveredOptId] = useState<string | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<{
     [pollId: string]: string | null;
   }>({});
   const error = useAppSelector(selectPollError);
+
+
+
+useEffect(() => {
+  socket.on("polls-closed", () => {
+    dispatch(AllPolls());
+  });
+}, []);
+
+
+
   useEffect(() => {
     if (id) {
       dispatch(SinglePoll(id));
@@ -257,7 +271,8 @@ export const Profile: React.FC = () => {
                     marginBottom: "5px",
                   }}
                 >
-                  <strong>Created By:</strong> {poll.createdBy}
+                  <strong>Created By:</strong> {poll.createdBy}   &nbsp; &nbsp;
+                 <strong>Expired At:</strong> {poll.ExpiredAt?moment(poll.ExpiredAt).format('YYYY-MM-DD HH:mm:ss'):""} 
                 </p>
                 <h2
                   style={{
@@ -289,7 +304,10 @@ export const Profile: React.FC = () => {
                         }}
                         onMouseEnter={() => setHoveredOptId(opt._id)}
                         onMouseLeave={() => setHoveredOptId(null)}
-                        onClick={() => voterdata(poll._id, opt._id, poll.userId)}
+                         onClick={() => {
+    if (poll.status === "closed") return; // prevent vote
+    voterdata(poll._id, opt._id, poll.userId);
+  }}
                       >
                         <div
                           style={{
@@ -349,6 +367,9 @@ export const Profile: React.FC = () => {
                     );
                   })}
                 </ul>
+                  {poll.status === "closed" && (
+  <p style={{ color: "red", fontWeight: "bold" }}>Poll Closed</p>
+)}
                 <p style={{ color: "red" }}>{error}</p>
               </div>
             );

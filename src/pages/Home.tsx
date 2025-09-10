@@ -4,6 +4,7 @@ import { AllPolls, selectCreatePoll, PollVote } from "../Features/Poll/pollSlice
 import { selectAuthUser } from "../Features/auth/authSlice";
 import socket from "../socket";
 import { selectPollError } from "../Features/Poll/pollSlice";
+import DownloadCsv from "../components/DownloadCsv";
 export const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const alldata = useAppSelector(selectCreatePoll);
@@ -47,10 +48,18 @@ console.log("resultAction",resultAction);
     alert( "You already voted for this poll");
   }
 };
+
+
+useEffect(() => {
+  socket.on("polls-closed", () => {
+    dispatch(AllPolls());
+  });
+}, []);
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <h1 style={{ color: "#333", marginBottom: "20px" }}>All Polls</h1>
-
+      
+<DownloadCsv/>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
         {alldata && alldata.length > 0 ? (
           alldata.map((poll) => {
@@ -82,22 +91,26 @@ console.log("resultAction",resultAction);
                     const percentage = totalVotes ? Math.round((opt.votes.length / totalVotes) * 100) : 0;
 
                     return (
-                      <li
-                        key={opt._id}
-                        style={{
-                          position: "relative",
-                          backgroundColor: isSelected ? "#28a745" : "#f1f1f1",
-                          color: isSelected ? "#fff" : "#000",
-                          margin: "10px 0",
-                          padding: "8px 12px",
-                          borderRadius: "5px",
-                          cursor: "pointer",
-                          transition: "background-color 0.3s ease",
-                        }}
-                        onMouseEnter={() => setHoveredOptId(opt._id)}
-                        onMouseLeave={() => setHoveredOptId(null)}
-                        onClick={() => voterdata(poll._id, opt._id, poll.userId)}
-                      >
+                     <li
+  key={opt._id}
+  style={{
+    position: "relative",
+    backgroundColor: isSelected ? "#28a745" : "#f1f1f1",
+    color: isSelected ? "#fff" : "#000",
+    margin: "10px 0",
+    padding: "8px 12px",
+    borderRadius: "5px",
+    cursor: poll.status === "closed" ? "not-allowed" : "pointer", // disable cursor
+    opacity: poll.status === "closed" ? 0.6 : 1, // faded look if closed
+    transition: "background-color 0.3s ease",
+  }}
+  onMouseEnter={() => setHoveredOptId(opt._id)}
+  onMouseLeave={() => setHoveredOptId(null)}
+  onClick={() => {
+    if (poll.status === "closed") return; // prevent vote
+    voterdata(poll._id, opt._id, poll.userId);
+  }}
+>
                         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
                           <span>{opt.text}</span>
                           <span>{percentage}%</span>
@@ -150,11 +163,18 @@ console.log("resultAction",resultAction);
                             ))}
                           </div>
                         )}
+
+                        {poll.status === "closed" && (
+  <p style={{ color: "red", fontWeight: "bold" }}>Poll Closed</p>
+)}
+
+
                         <p>{error}</p>
                       </li>
                     );
                   })}
                 </ul>
+                  <a href={`/comments/${poll._id}`}>see Comments</a>
 
               </div>
             );

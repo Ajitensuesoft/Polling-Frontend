@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import "./Navbar.css"
 import { AllPolls } from '../Features/Poll/pollSlice'
+import ThemeToggle from './ThemeToggle'
 export const Navabr: React.FC = () => {
   const dispatch = useAppDispatch();
   const aval = useAppSelector(isAuth);
@@ -44,11 +45,12 @@ const navigate=useNavigate();
             </button>
  <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>
+         <Link to='#'><ThemeToggle/></Link>
 
             </div>
           ) : (
             <>
-          
+             <Link to='#'><ThemeToggle/></Link>
               <Link to="/login">Login</Link>
               <Link to="/signup">Signup</Link>
             </>

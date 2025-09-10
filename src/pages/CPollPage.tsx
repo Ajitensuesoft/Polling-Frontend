@@ -13,6 +13,7 @@ interface ISHOWPOLL {
 type PollFormValues = {
   question: string;
   options: { value: string }[];
+  ExpiredAt:Date
 };
 
 const CPollPage: React.FC<ISHOWPOLL> = ({ setShowPoll }) => {
@@ -34,6 +35,7 @@ const Dispatch=useAppDispatch();
   const onSubmit: SubmitHandler<PollFormValues> = (data) => {
     console.log("Poll Data:", data);
     const realdata={
+      ExpiredAt:data.ExpiredAt,
       Question:data.question,
     Option:data.options,
       createdBy
@@ -48,6 +50,15 @@ const Dispatch=useAppDispatch();
       <h1 className="poll-title">Create Poll</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="poll-form">
+
+
+       <div className="form-group">
+          <label>Expired At</label>
+          <input type="datetime-local"
+            {...register("ExpiredAt", { required: true })}
+            
+          />
+        </div>
     
         <div className="form-group">
           <label>Question</label>

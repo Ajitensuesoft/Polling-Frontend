@@ -2,10 +2,9 @@ import axios from "axios";
 import type { IUSER } from "../Features/auth/authSlice"
 import type { IPoll } from '../Features/Poll/pollSlice';
 import { toast } from "react-toastify";
-const API = axios.create({
-    // baseURL: 'http://localhost:5000/app/v1',
-    baseURL: import.meta.env.VITE_API_URL,
-    // withCredentials: true,
+export const API = axios.create({
+  baseURL: import.meta.env.MODE === "development" ? import.meta.env.VITE_API_URLL : import.meta.env.VITE_API_URL,
+  // ...
 })
 
 API.interceptors.request.use((config) => {
@@ -125,3 +124,100 @@ export const PollVoteApi = async (data: any) => {
         // throw new Error(message);
     }
 }
+
+
+
+export const SinglePollCommentAPI=async(id:any)=>{
+
+    try{
+   const res = await API.get(`/commentPoll/${id}`);
+   console.log("resofcomment",res);
+   return res.data.data
+    }
+    catch (err: any) {
+        toast.error(err.response.data.message);
+        console.log("err", err);
+        console.log("vote Api", err.response.data.message);
+        const message = err.response?.data?.message;
+        throw message;
+        // throw new Error(message);
+    }
+}
+
+export const createCommentApi=async(data:any)=>{
+    
+console.log("data of comment",data);
+    try{
+   const res = await API.post(`/createComment`, data);
+   console.log("resofcomment",res);
+   return res.data.data
+    }
+    catch (err: any) {
+        toast.error(err.response.data.message);
+        console.log("err", err);
+        console.log("vote Api", err.response.data.message);
+        const message = err.response?.data?.message;
+        throw message;
+        // throw new Error(message);
+    }
+}
+
+
+
+
+export const AllcommentsApi=async()=>{
+
+    try{
+   const res = await API.get(`/allcomments`);
+   console.log("resofcomment",res);
+   return res.data.data
+    }
+    catch (err: any) {
+        toast.error(err.response.data.message);
+        console.log("err", err);
+        console.log("vote Api", err.response.data.message);
+        const message = err.response?.data?.message;
+        throw message;
+        // throw new Error(message);
+    }
+}
+
+
+
+
+export const updateCommentApi=async(data:any)=>{
+console.log("updatecomment",data);
+    try{
+   const res = await API.put(`/updatedComment`, data);
+   console.log("resofcomment",res);
+   return res.data.data
+    }
+    catch (err: any) {
+        toast.error(err.response.data.message);
+        console.log("err", err);
+        console.log("vote Api", err.response.data.message);
+        const message = err.response?.data?.message;
+        throw message;
+        // throw new Error(message);
+    }
+
+}
+
+
+export const deleteCommentApi=async(id:any)=>{
+    try{
+   const res = await API.delete(`/deleteComment/${id}`);
+   console.log("resofcomment",res.data.data);
+   return res.data.data
+    }
+    catch (err: any) {
+        toast.error(err.response.data.message);
+        console.log("err", err);
+        console.log("vote Api", err.response.data.message);
+        const message = err.response?.data?.message;
+        throw message;
+        // throw new Error(message);
+    }
+}
+
+
