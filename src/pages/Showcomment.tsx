@@ -41,14 +41,14 @@ console.log("allcomments",allcomments);
       console.log("Save edited comment:", payload);
 
       dispatch(updateComment(payload)).then(() => {
-      socket.emit("updateComment", payload); // 👈 emit socket event
+      socket.emit("updateComment", payload);
     });
 
 
       dispatch(Allcommment());
     }
 
-    // reset modal state
+   
     setIsModalOpen(false);
     setEditText("");
     setEditId(null);
@@ -60,11 +60,10 @@ const deletefuntion=(id:string)=>{
     console.log("deleteid",id);
    
        dispatch(deleteComment(id)).then(() => {
-    socket.emit("deleteComment", id); // 👈 emit socket event
+    socket.emit("deleteComment", id);
   });
    
-// let data=dispatch(deleteComment(id));
-// console.log("data",data);
+
 
 }
 let userId1 = localStorage.getItem("userId");
@@ -76,11 +75,11 @@ console.log("userId1",userId1);
 
 
 useEffect(() => {
-  dispatch(Allcommment()); // initial load
+  dispatch(Allcommment()); 
 
   socket.on("commentAdded", (newComment:any) => {
     console.log(" Comment added via socket:", newComment);
-    dispatch(Allcommment()); // refresh list
+    dispatch(Allcommment()); 
   });
 
   socket.on("commentUpdated", (updatedComment:any) => {

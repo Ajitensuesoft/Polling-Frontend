@@ -5,7 +5,7 @@ import { Allcommment, createComment } from "../Features/comment/commentSlice";
 import { useAppDispatch, useAppSelector } from "../app/hook";
 import { selectAuthUser } from "../Features/auth/authSlice";
 import socket from "../socket";
-import type{Icomment}  from "../Features/comment/commentSlice";
+
 interface CommentFormValues {
   comment: string;
 }

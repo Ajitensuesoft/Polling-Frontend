@@ -5,9 +5,8 @@
 // export default socket;
 
 
-import  io  from "socket.io-client";
-import { useEffect } from "react";
-import { AllPollsApi } from "./services/AllApi";
+// import { useEffect } from "react";
+// import { AllPollsApi } from "./services/AllApi";
 // import { AllPolls } from "./Features/Poll/pollSlice";
 // import { useAppDispatch } from "./app/hook";
 // const socket = io("https://polling-backend-ivcq.onrender.com", {
@@ -18,13 +17,14 @@ import { AllPollsApi } from "./services/AllApi";
 
 
 // const socket = io("https://polling-backend-ivcq.onrender.com", {
-//     withCredentials: true,
-// } as SocketIOClient.ConnectOpts);
-
-// export default socket;
-
-// const Dispatch=useAppDispatch();
-
+    //     withCredentials: true,
+    // } as SocketIOClient.ConnectOpts);
+    
+    // export default socket;
+    
+    // const Dispatch=useAppDispatch();
+    
+    import  io  from "socket.io-client";
 
 const socket = io("http://localhost:5000", {
     withCredentials: true,

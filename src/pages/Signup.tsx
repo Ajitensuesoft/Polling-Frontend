@@ -38,9 +38,9 @@ console.log("error",error);
       email: data.email,
       password: data.password,
     };
-    await dispatch(Signup(payload)).unwrap();//new thing learn unwrap()  its wait for success or failure
+    await dispatch(Signup(payload)).unwrap();
     
-      navigate("/login")       //if success then its hit else nothing happen
+      navigate("/login")       
     
     reset();
   };

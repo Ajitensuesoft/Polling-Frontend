@@ -100,14 +100,14 @@ useEffect(() => {
     margin: "10px 0",
     padding: "8px 12px",
     borderRadius: "5px",
-    cursor: poll.status === "closed" ? "not-allowed" : "pointer", // disable cursor
-    opacity: poll.status === "closed" ? 0.6 : 1, // faded look if closed
+    cursor: poll.status === "closed" ? "not-allowed" : "pointer",
+    opacity: poll.status === "closed" ? 0.6 : 1, 
     transition: "background-color 0.3s ease",
   }}
   onMouseEnter={() => setHoveredOptId(opt._id)}
   onMouseLeave={() => setHoveredOptId(null)}
   onClick={() => {
-    if (poll.status === "closed") return; // prevent vote
+    if (poll.status === "closed") return;
     voterdata(poll._id, opt._id, poll.userId);
   }}
 >

@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../app/hook";
-import { SinglePollComment } from "../Features/Poll/pollSlice";
+import {  useAppSelector } from "../app/hook";
+
 import { selectCreatePoll } from "../Features/Poll/pollSlice";
 import CommentBox from "./CommentBox";
 import Showcomment from "./Showcomment";
 
 const Comments: React.FC = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const pollData = useAppSelector(selectCreatePoll);
   console.log("polldata",pollData);
   const { id } = useParams<{ id: string }>();

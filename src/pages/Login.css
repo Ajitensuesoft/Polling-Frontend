@@ -1,4 +1,4 @@
-/* Container to center the form */
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@
   background: #f5f6fa;
 }
 
-/* Form box */
+
 .login-form {
   background: #fff;
   padding: 30px 40px;
@@ -25,14 +25,14 @@
   color: #1e1e2f;
 }
 
-/* Labels */
+
 .login-form label {
   margin-top: 10px;
   font-weight: 500;
   color: #333;
 }
 
-/* Inputs */
+
 .login-form input {
   padding: 10px;
   margin-top: 6px;
@@ -46,14 +46,14 @@
   border-color: #007bff;
 }
 
-/* Error messages */
+
 .error {
   font-size: 12px;
   color: red;
   margin: 4px 0;
 }
 
-/* Submit button */
+
 .btn-submit {
   margin-top: 20px;
   padding: 10px;

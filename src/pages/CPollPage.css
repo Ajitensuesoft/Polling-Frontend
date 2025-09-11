@@ -1,15 +1,18 @@
 .poll-container {
   border: 1px solid #ccc;
   padding: 20px;
-  width: 400px;
-  margin: 20px auto;
+  width: 100%;
+  max-width: 500px; 
+  margin: 30px auto;
   border-radius: 8px;
   background: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .poll-title {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
 .poll-form .form-group {
@@ -24,16 +27,18 @@
 
 .poll-form input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-bottom: 8px;
   border: 1px solid #aaa;
   border-radius: 4px;
+  font-size: 1rem;
 }
 
 .option-row {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  gap: 8px;
 }
 
 .option-row input {
@@ -41,43 +46,95 @@
 }
 
 .remove-btn {
-  margin-left: 5px;
   background: red;
-  color: white;
-  border: none;
-  padding: 5px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-btn {
-  background: blue;
   color: white;
   border: none;
   padding: 6px 10px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.remove-btn:hover {
+  background: darkred;
+}
+
+.add-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  font-size: 0.95rem;
+}
+
+.add-btn:hover {
+  background: #0056b3;
 }
 
 .button-group {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .submit-btn {
   background: green;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 4px;
   cursor: pointer;
+  flex: 1;
+}
+
+.submit-btn:hover {
+  background: darkgreen;
 }
 
 .cancel-btn {
   background: gray;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 4px;
   cursor: pointer;
+  flex: 1;
+}
+
+.cancel-btn:hover {
+  background: #444;
+}
+
+
+@media (max-width: 600px) {
+  .poll-container {
+    padding: 15px;
+    margin: 15px;
+    
+  }
+
+  .poll-title {
+    font-size: 1.2rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .option-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .remove-btn {
+    width: 100%;
+  }
 }
