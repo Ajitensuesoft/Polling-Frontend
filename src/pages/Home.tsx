@@ -5,13 +5,24 @@ import { selectAuthUser } from "../Features/auth/authSlice";
 import socket from "../socket";
 import { selectPollError } from "../Features/Poll/pollSlice";
 import DownloadCsv from "../components/DownloadCsv";
+import { selectComment } from "../Features/comment/commentSlice";
+import { Allcommment } from "../Features/comment/commentSlice";
 export const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const alldata = useAppSelector(selectCreatePoll);
   const user = useAppSelector(selectAuthUser);
   const [hoveredOptId, setHoveredOptId] = useState<string | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<{ [pollId: string]: string | null }>({});
+const allcomments = useAppSelector(selectComment);
 
+
+
+useEffect(()=>{
+  dispatch(Allcommment());
+},[dispatch])
+
+
+console.log("allcomments",allcomments);
   useEffect(() => {
 
     dispatch(AllPolls());
@@ -63,8 +74,9 @@ useEffect(() => {
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
         {alldata && alldata.length > 0 ? (
           alldata.map((poll) => {
-            const totalVotes = poll.Option?.reduce((acc, opt) => acc + (opt.votes?.length || 0), 0) || 0;
 
+            const totalVotes = poll.Option?.reduce((acc, opt) => acc + (opt.votes?.length || 0), 0) || 0;
+           const Totalcomments=allcomments?.filter((comm) => comm.PollId === poll._id).length;
             return (
               <div
                 key={poll._id}
@@ -174,7 +186,10 @@ useEffect(() => {
                     );
                   })}
                 </ul>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
                   <a href={`/comments/${poll._id}`}>see Comments</a>
+<p>Total Comments:{Totalcomments}</p>
+                </div>
 
               </div>
             );

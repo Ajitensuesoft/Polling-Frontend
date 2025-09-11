@@ -111,6 +111,7 @@ export const SinglePollApi = async (id: string) => {
 export const PollVoteApi = async (data: any) => {
     let token= localStorage.getItem("token");
     console.log("token",token);
+    console.log("pole vote data",data);
     try {
         const res = await API.post(`/votePoll`, data);
         console.log("poll vote value", res);
